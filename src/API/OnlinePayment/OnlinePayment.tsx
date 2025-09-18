@@ -1,6 +1,6 @@
 import { CheckOutSchemaType } from '@/schema/CheckOut.schema';
 import getMyToken from '@/Utilities/getMyToken'
-import React from 'react'
+
 
 export default async function OnlinePayment(id:string,url=process.env.NEXT_URL,values:CheckOutSchemaType) {
     const token=await getMyToken();

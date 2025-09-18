@@ -6,7 +6,12 @@ import "swiper/css";
 import Image from "next/image";
 import { CategoryType } from './../../../types/Category.type';
 
-export default function HomeCategorySlider({ info }) {
+
+interface HomeCategorySliderProps {
+  info: CategoryType[];
+}
+
+export default function HomeCategorySlider({ info }:HomeCategorySliderProps) {
   return (
     <>
       <div className="container w-[80%] mx-auto my-4 flex ">

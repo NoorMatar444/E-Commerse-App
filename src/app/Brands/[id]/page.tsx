@@ -1,7 +1,7 @@
 import React from 'react'
 import  Image  from 'next/image';
 
-export default async function DynamicBrand({params}) {
+export default async function DynamicBrand({params}:{params:Promise<{id:string}>}) {
     const{id}=await params
     const res=await fetch(`https://ecommerce.routemisr.com/api/v1/brands/${id}`)
     const {data}=await res.json()

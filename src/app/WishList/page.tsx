@@ -2,7 +2,9 @@
 import DeleteWishListApi from "@/API/DeleteWishList/DeleteWishListApi";
 import GetUserWishListApi from "@/API/GetUserWishList/GetUserWishListApi";
 import React, { useEffect, useState } from "react";
-import { toast } from "sonner";
+import  Image  from 'next/image';
+import { GetUserWishListType } from "@/types/GetUserWishListType.type";
+
 
 export default function WishList() {
   const [products, setProducts] = useState([]);
@@ -13,7 +15,7 @@ export default function WishList() {
     console.log(data);
     setProducts(data);
   }
-  async function deleteItem(id) {
+  async function deleteItem(id:string) {
     setCurrentId(id)
     setIsLoading(true)
     const data = await DeleteWishListApi(id);
@@ -27,13 +29,15 @@ export default function WishList() {
   return (
     <>
       <div className="container w-[80%] mx-auto ">
-        {products.map((product) => (
+        {products.map((product:GetUserWishListType) => (
           <tr
             key={product._id}
             className="w-full flex justify-center items-center bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
           >
             <td className="p-4">
-              <img
+              <Image
+                width={500}
+                height={500}
                 src={product.imageCover}
                 className="w-16 md:w-32 max-w-full max-h-full"
                 alt="Apple Watch"

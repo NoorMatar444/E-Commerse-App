@@ -1,8 +1,9 @@
 "use server"
+// import { WishListType } from '@/types/WishList.type';
 import getMyToken from '@/Utilities/getMyToken';
-import React from 'react'
 
-export default async function AddToWishListApi(productId) {
+
+export default async function AddToWishListApi(productId:string) {
     try {
         const token = await getMyToken();
         if (!token) {

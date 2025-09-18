@@ -1,8 +1,8 @@
 "use server"
 import getMyToken from '@/Utilities/getMyToken';
-import React from 'react'
 
-export default async function DeleteWishListApi(id) {
+
+export default async function DeleteWishListApi(id:string) {
 const token=await getMyToken();
     if(!token){
         throw new Error("please Login");

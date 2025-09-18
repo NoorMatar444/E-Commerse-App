@@ -1,7 +1,7 @@
 "use server";
 import { cookies } from "next/headers";
 import { decode } from "next-auth/jwt";
-import React from "react";
+
 
 export default async function getMyToken() {
   try{
@@ -16,7 +16,7 @@ export default async function getMyToken() {
     secret: process.env.NEXTAUTH_SECRET!,
   });
   console.log(token);
-  return token?.token;
+  return token?.token || null;
   }
   catch(err){
     return null;

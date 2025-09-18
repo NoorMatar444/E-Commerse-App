@@ -1,14 +1,17 @@
 "use client";
 import Link from "next/link";
-import React, { useContext, useState } from "react";
+import React, { useContext} from "react";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { CartContext } from "./../../CartContextProvider/CartContextProvider";
 
 export default function Navbar() {
   const path = usePathname();
-  const { data: session, status } = useSession();
-  const { countNumber, setcountNumber } = useContext(CartContext);
+  const { data: session } = useSession();
+  // const { countNumber, setcountNumber } = useContext(CartContext);
+  const context=useContext(CartContext);
+    if(!context) throw new Error("Not exist");
+     const {countNumber}=context
   function Logout() {
     signOut({ callbackUrl: "/Login" });
   }

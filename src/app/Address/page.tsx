@@ -11,6 +11,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Daum } from "@/types/Address.type";
 import getMyToken from "@/Utilities/getMyToken";
 import axios from "axios";
 import Link from "next/link";
@@ -23,8 +24,8 @@ export default function Address() {
   const [address,SetAddress]=useState([]);
   const [isLoading,setIsLoading]=useState(false);
   const [currentId,setCurrentId]=useState("");
-  const [isDesabled,setIsDesabled]=useState(false)
-     const form = useForm({
+  // const [isDesabled,setIsDesabled]=useState(false)
+     const form = useForm<Daum>({
         defaultValues: {
           name: "",
           details: "",
@@ -33,7 +34,7 @@ export default function Address() {
         },
         
       });
-      async function handleAddress(values) {
+      async function handleAddress(values:Daum) {
         const token=await getMyToken()
         console.log(values);
     try{
@@ -57,7 +58,7 @@ export default function Address() {
     const {data}=await GetUserAddressApi()
     SetAddress(data)
   }
-  async function deleteAddress(id){
+  async function deleteAddress(id:string){
     setCurrentId(id);
     setIsLoading(true);
     const data= await RemoveAddressApi(id);
@@ -132,7 +133,7 @@ export default function Address() {
         </Form>
       </div>
       <div className="container w-[80%] mx-auto">
-              {address.map((item)=><div key={item._id}>
+              {address.map((item:Daum)=><div key={item._id}>
                <Link href={`/Address/${item._id}`}>
                  <div className="card border-2 my-6">
                   <h1>{item.name}</h1>

@@ -1,5 +1,5 @@
 "use server"
-import React from 'react'
+
 
 export default async function GetAllSubCateroriesApi() {
     const res=await fetch(`https://ecommerce.routemisr.com/api/v1/subcategories`)

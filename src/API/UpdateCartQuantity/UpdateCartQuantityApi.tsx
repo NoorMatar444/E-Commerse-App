@@ -1,8 +1,8 @@
 "use server"
 import getMyToken from '@/Utilities/getMyToken';
-import React from 'react'
 
-export default async function UpdateCartQuantityApi(id,count) {
+
+export default async function UpdateCartQuantityApi(id:string,count:string) {
       const token = await getMyToken();
       if (!token) {
         throw new Error("No token found");

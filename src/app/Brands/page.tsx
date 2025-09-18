@@ -10,9 +10,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
+import { BrandsType } from "@/types/Brands.type";
 
 export default function Brands() {
-  const [brands, setBrands] = useState<any[]>([]);
+  const [brands, setBrands] = useState<BrandsType[]>([]);
 
   async function getBrands() {
     try {
@@ -30,7 +31,7 @@ export default function Brands() {
 
   return (
     <div className="container w-[80%] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {brands.map((brand) => (
+      {brands.map((brand:BrandsType) => (
         <Link key={brand._id} href={`/Brands/${brand._id}`}>
           <Card key={brand._id} className="flex flex-col items-center p-4">
             <CardHeader className="flex flex-col items-center">

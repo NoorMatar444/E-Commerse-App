@@ -2,6 +2,7 @@ import GetAllSubCateroriesApi from "@/API/GetAllSubCaterories/GetAllSubCaterorie
 import React from "react";
 import Link from "next/link";
 import SubCategories from "./../subCategories/subCategories";
+import { CategoryType } from "@/types/Category.type";
 
 
 export default async function Categories() {
@@ -10,7 +11,7 @@ export default async function Categories() {
   return (
     <>
       <div className="container w-[80%] mx-auto ">
-        {data.map((category) => (
+        {data.map((category:CategoryType) => (
           <div className="items" key={category._id}>
             <Link href={`/Categories/${category._id}`}>
               <div className="category">

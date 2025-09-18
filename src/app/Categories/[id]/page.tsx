@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default async function dynamicCategories({params}) {
+export default async function dynamicCategories({params}:{params:Promise<{id:string}>}) {
     const {id}=await params
     const res =await fetch(`https://ecommerce.routemisr.com/api/v1/subcategories/${id}`);
     const {data}=await res.json();

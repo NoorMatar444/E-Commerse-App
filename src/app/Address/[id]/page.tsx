@@ -1,8 +1,8 @@
 import getMyToken from '@/Utilities/getMyToken';
 import React from 'react'
 
-export default async function DynamicAddress({params}) {
-    const{id}= params
+export default async function DynamicAddress({params}:{params:Promise<{id:string}>}) {
+    const{id}=await params
     
         const token = await getMyToken();
         if (!token) {

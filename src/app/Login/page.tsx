@@ -12,17 +12,15 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from 'axios';
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"; // Next.js 13+ مع App Router
 import { LoginSchema,loginSchemaType } from "@/schema/Login.schema";
 import {signIn} from "next-auth/react"
-import ForgetPaaswordModal from "../ForgetPasswordModal/ForgetPasswordModalApi";
+
 
 
 
 export default function Login() {
-  const router=useRouter();
+  
   const form = useForm<loginSchemaType>({
     defaultValues: {
       email: "",

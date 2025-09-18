@@ -8,7 +8,6 @@ import Navbar from "./_Commponent/Navbar/Navbar";
 import { Toaster } from "@/components/ui/sonner";
 import MySessionProvider from "@/MySessionProvider/MySessionProvider";
 import CartContextProvider, {
-  CartContext,
 } from "./CartContextProvider/CartContextProvider";
 const geistSans = Geist({
   variable: "--font-geist-sans",

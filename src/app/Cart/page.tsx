@@ -5,9 +5,10 @@ import UpdateCartQuantityApi from "@/API/UpdateCartQuantity/UpdateCartQuantityAp
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from '@/components/ui/button';
 import ClearCartItemApi from "@/API/ClearCartItem/ClearCartItemApi";
-import CreatOrderModal from "../CreatOrderModal/CreatOrderModal";
 import { CartContext } from "../CartContextProvider/CartContextProvider";
 import Link from "next/link";
+import { CartProductType } from "@/types/Cart.type";
+import  Image  from 'next/image';
 
 
 export default function Cart() {
@@ -21,10 +22,13 @@ export default function Cart() {
   const [RemoveId,setRemoveId]=useState("")
   const [cartId,setcartId]=useState("");
   const [isDelete,setIsDelete]=useState(false);
-  const {countNumber,setcountNumber}=useContext(CartContext);
+ const context = useContext(CartContext);
+if (!context) {
+  throw new Error("CartContext must be used within CartContextProvider");
+}
+const { countNumber, setcountNumber } = context;
   async function reciveGetUserCartApi() {
     const res = await GetUserCart();
-    console.log(res);
     if (res.status === "success") {
       setProducts(res.data.products);
       setIsLoading(false)
@@ -36,7 +40,7 @@ export default function Cart() {
       
     }
   }
-  async function deleteItem(id){
+  async function deleteItem(id:string){
     setRemoveId(id);
     setisDesiabled(true)
     setIsDelete(true)
@@ -49,12 +53,12 @@ export default function Cart() {
       setIsDelete(false)
     }
     let sum=0;
-    res.data.products.forEach((product)=>{
+    res.data.products.forEach((product:CartProductType)=>{
       sum+=product.count;
       setcountNumber(sum)
     })
   }
-  async function updateProduct(id,count,sign){
+  async function updateProduct(id:string,count:string,sign:string){
     setCurrentId(id)
     setisDesiabledUbdate(true)
     setIsLoadingCount(true)
@@ -119,9 +123,11 @@ export default function Cart() {
             </tr>
           </thead>
           <tbody>
-            {products.map((product)=><tr key={product._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+            {products.map((product:CartProductType)=><tr key={product._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
               <td className="p-4">
-                <img
+                <Image
+                  width={500}
+                  height={500}
                   src={product.product.imageCover}
                   className="w-16 md:w-32 max-w-full max-h-full"
                   alt="Apple Watch"
@@ -133,10 +139,10 @@ export default function Cart() {
               <td className="px-6 py-4">
                 
                 <div className="flex items-center gap-4">
-                  <button disabled={isDesiabledUpdate} onClick={()=>updateProduct(product.product.id,product.count+1,"+")}><i className="fa-solid fa-plus"></i></button>
+                  <button disabled={isDesiabledUpdate} onClick={()=>updateProduct(product.product.id,`${product.count+1}`,"+")}><i className="fa-solid fa-plus"></i></button>
                   
                   {currentId===product.product.id?isLoadingCount?<i className="fa-solid fa-spinner fa-spin"></i>:product.count:product.count}
-                  <button disabled={isDesiabledUpdate} onClick={()=>updateProduct(product.product.id,product.count-1,"-")}><i className="fa-solid fa-minus"></i></button>
+                  <button disabled={isDesiabledUpdate} onClick={()=>updateProduct(product.product.id,`${product.count-1}`,"-")}><i className="fa-solid fa-minus"></i></button>
                 </div>
               </td>
               <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">

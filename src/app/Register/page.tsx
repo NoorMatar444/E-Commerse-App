@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema ,registerSchemaType} from "@/schema/Register.schema";
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { toast } from "sonner"
 
 
@@ -43,8 +43,10 @@ export default function Register() {
         router.push('/Login')
       }
     }
-    catch(err){
-      toast.error("error.",{position:"top-center",duration:3000})
+    catch(err:unknown){
+      if(err instanceof AxiosError){
+         toast.error("error.",{position:"top-center",duration:3000})
+      }
     }
   }
   return (
